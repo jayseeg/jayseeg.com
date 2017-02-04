@@ -1,0 +1,19 @@
+{
+  "name": "jayseeg.com",
+  "version": "0.0.4",
+  "description": "Jake Gibbons personal site.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/jayseeg/jayseeg.com.git"
+  },
+  "author": "@jayseeg",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/jayseeg/jayseeg.com/issues"
+  },
+  "homepage": "https://github.com/jayseeg/jayseeg.com#readme"
+}
