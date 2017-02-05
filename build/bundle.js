@@ -70,7 +70,9 @@
 /* 0 */
 /***/ (function(module, exports) {
 
-console.info('hi')
+const message = 'hi'
+
+console.info(message)
 
 
 /***/ })
