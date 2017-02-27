@@ -19,7 +19,8 @@
     "deploy": "better-npm-run deploy",
     "deploy:dev": "better-npm-run deploy:dev",
     "deploy:prod": "better-npm-run deploy:prod",
-    "codecov": "cat coverage/*/lcov.info | codecov"
+    "codecov": "cat coverage/*/lcov.info | codecov",
+    "syncProd": "better-npm-run syncProd"
   },
   "betterScripts": {
     "compile": {
@@ -49,7 +50,7 @@
       }
     },
     "deploy:prod": {
-      "command": "npm run deploy",
+      "command": "npm run deploy && npm run syncProd",
       "env": {
         "NODE_ENV": "production",
         "DEBUG": "app:*"
@@ -60,6 +61,9 @@
       "env": {
         "DEBUG": "app:*"
       }
+    },
+    "syncProd": {
+      "command": "aws s3 sync ./dist/ s3://jayseeg.com/"
     },
     "test": {
       "command": "node ./node_modules/karma/bin/karma start config/karma.config",
