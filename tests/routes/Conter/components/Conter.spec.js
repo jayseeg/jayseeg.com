@@ -11,8 +11,10 @@ describe('(Component) Conter', () => {
     _props = {
       conter : 5,
       ...bindActionCreators({
-        doubleAsync : (_spies.doubleAsync = sinon.spy()),
-        increment   : (_spies.increment = sinon.spy())
+        exponentAsync: (_spies.exponentAsync = sinon.spy()),
+        doubleAsync:   (_spies.doubleAsync = sinon.spy()),
+        reset:         (_spies.reset = sinon.spy()),
+        increment:     (_spies.increment = sinon.spy()),
       }, _spies.dispatch = sinon.spy())
     }
     _wrapper = shallow(<Conter {..._props} />)
@@ -32,8 +34,8 @@ describe('(Component) Conter', () => {
     expect(_wrapper.find('h2').text()).to.match(/8$/)
   })
 
-  it('Should render exactly two buttons.', () => {
-    expect(_wrapper.find('button')).to.have.length(2)
+  it('Should render exactly 4 buttons.', () => {
+    expect(_wrapper.find('button')).to.have.length(4)
   })
 
   describe('An increment button...', () => {
@@ -57,6 +59,27 @@ describe('(Component) Conter', () => {
     })
   })
 
+  describe('A reset button...', () => {
+    let _button
+
+    beforeEach(() => {
+      _button = _wrapper.find('button').filterWhere(a => a.text() === 'Reset')
+    })
+
+    it('has bootstrap classes', () => {
+      expect(_button.hasClass('btn btn-default')).to.be.true
+    })
+
+    it('Should dispatch a `reset` action when clicked', () => {
+      _spies.dispatch.should.have.not.been.called
+
+      _button.simulate('click')
+
+      _spies.dispatch.should.have.been.called
+      _spies.reset.should.have.been.called
+    })
+  })
+
   describe('A Double (Async) button...', () => {
     let _button
 
@@ -75,6 +98,27 @@ describe('(Component) Conter', () => {
 
       _spies.dispatch.should.have.been.called
       _spies.doubleAsync.should.have.been.called
+    })
+  })
+
+  describe('An Exponent (Async) button...', () => {
+    let _button
+
+    beforeEach(() => {
+      _button = _wrapper.find('button').filterWhere(a => a.text() === 'Exponent (Async)')
+    })
+
+    it('has bootstrap classes', () => {
+      expect(_button.hasClass('btn btn-default')).to.be.true
+    })
+
+    it('Should dispatch a `exponentAsync` action when clicked', () => {
+      _spies.dispatch.should.have.not.been.called
+
+      _button.simulate('click')
+
+      _spies.dispatch.should.have.been.called
+      _spies.exponentAsync.should.have.been.called
     })
   })
 })
