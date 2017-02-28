@@ -16,7 +16,7 @@ export const Conter = (props) => (
     </button>
     {' '}
     <button className='btn btn-default' onClick={props.exponentAsync}>
-      Exponent (Async)
+      ^2 (Async)
     </button>
   </div>
 )
